@@ -44,7 +44,7 @@ function DrawCar(){
 
 function DrawBoard(){
     for(var index = 0; index < colums; index++){
-        if(index%2 == 0){
+        if(index%3 != 0){
             ctx.fillRect(0, index*side, side, side)
             ctx.fillRect((rows-1)*side-side, index*side, side, side)
         }

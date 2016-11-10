@@ -1,6 +1,6 @@
 var canvas = document.getElementById('canvas_id')
 var ctx = canvas.getContext('2d')
-var side = 20, rows = 12, colums = 20, moveTime = 500
+var side = 20, rows = 12, colums = 20, moveTime = 200, counter = 0
 var coef = 3
 var car = []
 var enemyCars = []
@@ -21,7 +21,7 @@ function AddEnemy(){
     var additionCoef = coef*GetRandIn(0,2)
     for(var index = 0; index < carTemplate.length; index++){
         block = carTemplate[index]
-        PushBack(block[0]+additionCoef,block[1],enemyCar)
+        PushBack(block[0]+additionCoef,block[1]-coef,enemyCar)
     }
     enemyCars.push(enemyCar)
 }
@@ -56,11 +56,31 @@ function DrawEnemyCars(){
     var block
     for(var index = 0; index < enemyCars.length; index++){
         enemyCar = enemyCars[index]
+        ctx.clearRect(enemyCar.rowIndex,enemyCar.colIndex,side*4,side*3)
         for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
             block = enemyCar[blockIndex]
             ctx.fillRect(block.rowIndex*side, block.colIndex*side, side, side)
         }
     }
+}
+
+function MoveEnemyCars(){
+    var enemyCar
+    var block
+    for(var index = 0; index < enemyCars.length; index++){
+        enemyCar = enemyCars[index]
+        for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
+            block = enemyCar[blockIndex]
+            block.colIndex++
+            if(block.colIndex == colums+4){
+                enemyCars[index].pop()
+                console.log('deleted')
+            }
+        }
+    }
+    counter++
+    if(counter%12==0)
+        AddEnemy(0)
 }
 
 function Move(moveDirection){
@@ -76,11 +96,14 @@ function Move(moveDirection){
 
 SetCar()
 AddEnemy()
-DrawCar()
 
 document.addEventListener('keydown', function(event) {
     var head = car[car.length-1]
     if(event.which == 37) Move('left')
     else if (event.which == 39) Move('right')
-      DrawCar()
 })
+
+mainGameCycle = setInterval(function(){
+    DrawCar()
+    MoveEnemyCars()
+},moveTime)

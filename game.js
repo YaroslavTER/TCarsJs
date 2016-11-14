@@ -100,14 +100,16 @@ function CheckCollision(){
     var enemyBlock, block
     for(var index = 0; index < enemyCars.length; index++){
         enemyCar = enemyCars[index]
-        for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
-            enemyBlock = enemyCar[blockIndex]
-            block = car[blockIndex]
-            if(block.rowIndex == enemyBlock.rowIndex && block.colIndex == enemyBlock.colIndex){
-                isRunnig=false;
-                console.log('stop')
+        for(var carIndex = 0; carIndex < car.length; carIndex++){
+            for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
+                enemyBlock = enemyCar[blockIndex]
+                block = car[carIndex]
+                if(block.rowIndex == enemyBlock.rowIndex && block.colIndex == enemyBlock.colIndex){
+                    isRunnig=false;
+                    console.log('stop')
+                }
             }
-        }
+       }
     }
 }
 

@@ -7,6 +7,7 @@ var enemyCars = []
 var carColor = '#000000'
 var carTemplate = [[2,0],[1,1],[2,1],[3,1],[2,2],[1,3],[2,3],[3,3]]
 var isRunnig = true
+var boardCounter = 0
 
 function SetCar(){
     var block
@@ -44,12 +45,16 @@ function DrawCar(){
 }
 
 function DrawBoard(){
+    var auxCoef=3
     for(var index = 0; index < colums; index++){
-        if(index%3 != 0){
+        if(index%auxCoef != boardCounter){
             ctx.fillRect(0, index*side, side, side)
             ctx.fillRect((rows-1)*side-side, index*side, side, side)
         }
     }
+    boardCounter++
+    if(boardCounter==auxCoef)
+        boardCounter=0
 }
 
 function DrawEnemyCars(){

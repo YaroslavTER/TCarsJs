@@ -6,6 +6,7 @@ var car = []
 var enemyCars = []
 var carColor = '#000000'
 var carTemplate = [[2,0],[1,1],[2,1],[3,1],[2,2],[1,3],[2,3],[3,3]]
+var isRunnig = true
 
 function SetCar(){
     var block
@@ -94,16 +95,40 @@ function Move(moveDirection){
     }
 }
 
+function CheckCollision(){
+    var enemyCar
+    var enemyBlock, block
+    for(var index = 0; index < enemyCars.length; index++){
+        enemyCar = enemyCars[index]
+        for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
+            enemyBlock = enemyCar[blockIndex]
+            block = car[blockIndex]
+            if(block.rowIndex == enemyBlock.rowIndex && block.colIndex == enemyBlock.colIndex){
+                isRunnig=false;
+                console.log('stop')
+            }
+        }
+    }
+}
+
 SetCar()
 AddEnemy()
 
 document.addEventListener('keydown', function(event) {
     var head = car[car.length-1]
-    if(event.which == 37) Move('left')
-    else if (event.which == 39) Move('right')
+    if(isRunnig){
+        if(event.which == 37) Move('left')
+        else if (event.which == 39) Move('right')
+        else if (event.which == 38) MoveEnemyCars()
+        DrawCar()
+        CheckCollision()
+    }
 })
 
 mainGameCycle = setInterval(function(){
-    DrawCar()
-    MoveEnemyCars()
+    if(isRunnig){
+        CheckCollision()
+        DrawCar()
+        MoveEnemyCars()
+    }
 },moveTime)

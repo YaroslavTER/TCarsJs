@@ -1,7 +1,7 @@
 var canvas = document.getElementById('canvas_id')
 var ctx = canvas.getContext('2d')
 var side = 20, rows = 12, colums = 20, moveTime = 200, counter = 0
-var coef = 3
+var coef = 3, frequency = 12
 var car = []
 var enemyCars = []
 var carColor = '#000000'
@@ -84,9 +84,13 @@ function MoveEnemyCars(){
             }
         }
     }
-    counter++
-    if(counter%12==0)
+    GenerateEnemy()
+}
+
+function GenerateEnemy(){
+    if(counter%frequency==0)
         AddEnemy(0)
+    counter++
 }
 
 function Move(moveDirection){
@@ -119,7 +123,6 @@ function CheckCollision(){
 }
 
 SetCar()
-AddEnemy()
 
 document.addEventListener('keydown', function(event) {
     var head = car[car.length-1]

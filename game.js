@@ -5,7 +5,7 @@ var coef = 3, frequency = 12
 var car = []
 var enemyCars = []
 var carColor = '#000000'
-var carTemplate = [[2,0],[1,1],[2,1],[3,1],[2,2],[1,3],[2,3],[3,3]]
+var carTemplate = [[2,0],[1,1],[2,1],[3,1],[2,2],[1,3],[3,3]]
 var isRunnig = true
 var boardCounter = 0
 

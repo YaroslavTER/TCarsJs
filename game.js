@@ -28,9 +28,12 @@ function AddEnemy(){
     enemyCars.push(enemyCar)
 }
 
-function GetRandIn(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min }
+function GetRandIn(min, max){ return Math.floor(Math.random() *
+                                                (max - min + 1)) + min }
 
-function PushBack(rowIndex, colIndex, inputCar){ inputCar.push({rowIndex:rowIndex, colIndex:colIndex}) }
+function PushBack(rowIndex, colIndex, inputCar){
+    inputCar.push({rowIndex:rowIndex, colIndex:colIndex})
+}
 
 function DrawCar(){
     ctx.fillStyle = carColor
@@ -113,7 +116,8 @@ function CheckCollision(){
             for(var blockIndex = 0; blockIndex < enemyCar.length; blockIndex++){
                 enemyBlock = enemyCar[blockIndex]
                 block = car[carIndex]
-                if(block.rowIndex == enemyBlock.rowIndex && block.colIndex == enemyBlock.colIndex){
+                if(block.rowIndex == enemyBlock.rowIndex &&
+                   block.colIndex == enemyBlock.colIndex){
                     isRunnig=false;
                     console.log('stop')
                 }
